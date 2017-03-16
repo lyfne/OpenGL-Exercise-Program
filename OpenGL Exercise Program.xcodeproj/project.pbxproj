@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA8982421E7A316A00CDBE2F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = DA8982411E7A316A00CDBE2F /* main.c */; };
+		DA89824B1E7A435600CDBE2F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = DA89824A1E7A435600CDBE2F /* main.c */; };
+		DA89824E1E7A453300CDBE2F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89824D1E7A453300CDBE2F /* Cocoa.framework */; };
+		DA8982501E7A453900CDBE2F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89824F1E7A453900CDBE2F /* OpenGL.framework */; };
+		DA8982521E7A454100CDBE2F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8982511E7A454100CDBE2F /* IOKit.framework */; };
+		DA8982541E7A454C00CDBE2F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8982531E7A454C00CDBE2F /* CoreVideo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +28,11 @@
 
 /* Begin PBXFileReference section */
 		DA89823E1E7A316A00CDBE2F /* OpenGL Exercise Program */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL Exercise Program"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA8982411E7A316A00CDBE2F /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		DA89824A1E7A435600CDBE2F /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		DA89824D1E7A453300CDBE2F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DA89824F1E7A453900CDBE2F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		DA8982511E7A454100CDBE2F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		DA8982531E7A454C00CDBE2F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +40,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA8982541E7A454C00CDBE2F /* CoreVideo.framework in Frameworks */,
+				DA8982521E7A454100CDBE2F /* IOKit.framework in Frameworks */,
+				DA8982501E7A453900CDBE2F /* OpenGL.framework in Frameworks */,
+				DA89824E1E7A453300CDBE2F /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +55,7 @@
 			children = (
 				DA8982401E7A316A00CDBE2F /* OpenGL Exercise Program */,
 				DA89823F1E7A316A00CDBE2F /* Products */,
+				DA89824C1E7A453300CDBE2F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +70,20 @@
 		DA8982401E7A316A00CDBE2F /* OpenGL Exercise Program */ = {
 			isa = PBXGroup;
 			children = (
-				DA8982411E7A316A00CDBE2F /* main.c */,
+				DA89824A1E7A435600CDBE2F /* main.c */,
 			);
 			path = "OpenGL Exercise Program";
+			sourceTree = "<group>";
+		};
+		DA89824C1E7A453300CDBE2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA8982531E7A454C00CDBE2F /* CoreVideo.framework */,
+				DA8982511E7A454100CDBE2F /* IOKit.framework */,
+				DA89824F1E7A453900CDBE2F /* OpenGL.framework */,
+				DA89824D1E7A453300CDBE2F /* Cocoa.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8982421E7A316A00CDBE2F /* main.c in Sources */,
+				DA89824B1E7A435600CDBE2F /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +240,18 @@
 		DA8982461E7A316A00CDBE2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(glfw_header)",
+					"$(glew_header)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(glew_lib)",
+					"$(glfw_lib)",
+				);
+				OTHER_LDFLAGS = (
+					"-lGLEW",
+					"-lglfw",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -223,6 +259,10 @@
 		DA8982471E7A316A00CDBE2F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"-lGLEW",
+					"-lglfw",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
