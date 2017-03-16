@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA89824B1E7A435600CDBE2F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = DA89824A1E7A435600CDBE2F /* main.c */; };
 		DA89824E1E7A453300CDBE2F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89824D1E7A453300CDBE2F /* Cocoa.framework */; };
 		DA8982501E7A453900CDBE2F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89824F1E7A453900CDBE2F /* OpenGL.framework */; };
 		DA8982521E7A454100CDBE2F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8982511E7A454100CDBE2F /* IOKit.framework */; };
 		DA8982541E7A454C00CDBE2F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8982531E7A454C00CDBE2F /* CoreVideo.framework */; };
+		DA8982561E7A587900CDBE2F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA8982551E7A587900CDBE2F /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,11 +28,11 @@
 
 /* Begin PBXFileReference section */
 		DA89823E1E7A316A00CDBE2F /* OpenGL Exercise Program */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL Exercise Program"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA89824A1E7A435600CDBE2F /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		DA89824D1E7A453300CDBE2F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DA89824F1E7A453900CDBE2F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		DA8982511E7A454100CDBE2F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		DA8982531E7A454C00CDBE2F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		DA8982551E7A587900CDBE2F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 		DA8982401E7A316A00CDBE2F /* OpenGL Exercise Program */ = {
 			isa = PBXGroup;
 			children = (
-				DA89824A1E7A435600CDBE2F /* main.c */,
+				DA8982551E7A587900CDBE2F /* main.cpp */,
 			);
 			path = "OpenGL Exercise Program";
 			sourceTree = "<group>";
@@ -143,7 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA89824B1E7A435600CDBE2F /* main.c in Sources */,
+				DA8982561E7A587900CDBE2F /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
