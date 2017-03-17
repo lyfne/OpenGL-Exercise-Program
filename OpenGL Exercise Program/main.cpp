@@ -16,6 +16,8 @@
 //GLFW
 #include <GLFW/glfw3.h>
 
+#include <SOIL.h>
+
 using namespace std;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -42,6 +44,9 @@ const GLchar* fragmentShaderSource = "#version 330 core\n"
 
 int main()
 {
+    int widthImage, heightImage;
+    unsigned char* image = SOIL_load_image("texture.png", &widthImage, &heightImage, 0, SOIL_LOAD_RGB);
+    
     //init glfw
     glfwInit();
     //set required options for glfw

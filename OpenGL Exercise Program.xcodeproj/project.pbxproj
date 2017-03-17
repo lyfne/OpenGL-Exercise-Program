@@ -30,6 +30,9 @@
 /* Begin PBXFileReference section */
 		DA0915C01E7B85900042EDD9 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		DA0915C11E7B85900042EDD9 /* Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		DA0915C31E7BB2A20042EDD9 /* libSOIL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSOIL.a; path = "../libSOIL-master/libSOIL.a"; sourceTree = "<group>"; };
+		DA0915C61E7BB3A20042EDD9 /* libSOIL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSOIL.dylib; path = "../libSOIL-master/libSOIL.dylib"; sourceTree = "<group>"; };
+		DA0915CB1E7BB5880042EDD9 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 		DA89823E1E7A316A00CDBE2F /* OpenGL Exercise Program */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL Exercise Program"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA89824D1E7A453300CDBE2F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DA89824F1E7A453900CDBE2F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -73,6 +76,7 @@
 		DA8982401E7A316A00CDBE2F /* OpenGL Exercise Program */ = {
 			isa = PBXGroup;
 			children = (
+				DA0915CB1E7BB5880042EDD9 /* texture.jpg */,
 				DA8982551E7A587900CDBE2F /* main.cpp */,
 				DA0915C01E7B85900042EDD9 /* Shader.cpp */,
 				DA0915C11E7B85900042EDD9 /* Shader.hpp */,
@@ -83,6 +87,8 @@
 		DA89824C1E7A453300CDBE2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA0915C61E7BB3A20042EDD9 /* libSOIL.dylib */,
+				DA0915C31E7BB2A20042EDD9 /* libSOIL.a */,
 				DA8982531E7A454C00CDBE2F /* CoreVideo.framework */,
 				DA8982511E7A454100CDBE2F /* IOKit.framework */,
 				DA89824F1E7A453900CDBE2F /* OpenGL.framework */,
@@ -249,14 +255,17 @@
 				HEADER_SEARCH_PATHS = (
 					"$(glfw_header)",
 					"$(glew_header)",
+					"$(soil_header)",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(glew_lib)",
 					"$(glfw_lib)",
+					"$(soil_lib)",
 				);
 				OTHER_LDFLAGS = (
 					"-lGLEW",
 					"-lglfw",
+					"-lSOIL",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -268,6 +277,7 @@
 				OTHER_LDFLAGS = (
 					"-lGLEW",
 					"-lglfw",
+					"-lSOIL",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
