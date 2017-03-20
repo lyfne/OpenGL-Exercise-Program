@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA0915C21E7B85900042EDD9 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0915C01E7B85900042EDD9 /* Shader.cpp */; };
+		DA2D23FF1E7FC5260051C45A /* LessonCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA2D23FD1E7FC5260051C45A /* LessonCode.cpp */; };
 		DA89824E1E7A453300CDBE2F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89824D1E7A453300CDBE2F /* Cocoa.framework */; };
 		DA8982501E7A453900CDBE2F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA89824F1E7A453900CDBE2F /* OpenGL.framework */; };
 		DA8982521E7A454100CDBE2F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8982511E7A454100CDBE2F /* IOKit.framework */; };
@@ -33,6 +34,10 @@
 		DA0915C31E7BB2A20042EDD9 /* libSOIL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSOIL.a; path = "../libSOIL-master/libSOIL.a"; sourceTree = "<group>"; };
 		DA0915C61E7BB3A20042EDD9 /* libSOIL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSOIL.dylib; path = "../libSOIL-master/libSOIL.dylib"; sourceTree = "<group>"; };
 		DA0915CB1E7BB5880042EDD9 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
+		DA2D23FB1E7FB1330051C45A /* texture.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = texture.frag; path = shaders/texture.frag; sourceTree = "<group>"; };
+		DA2D23FC1E7FB1330051C45A /* texture.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = texture.vert; path = shaders/texture.vert; sourceTree = "<group>"; };
+		DA2D23FD1E7FC5260051C45A /* LessonCode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LessonCode.cpp; sourceTree = "<group>"; };
+		DA2D23FE1E7FC5260051C45A /* LessonCode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LessonCode.hpp; sourceTree = "<group>"; };
 		DA89823E1E7A316A00CDBE2F /* OpenGL Exercise Program */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL Exercise Program"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA89824D1E7A453300CDBE2F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DA89824F1E7A453900CDBE2F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -56,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA2D23FA1E7FB1260051C45A /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				DA2D23FB1E7FB1330051C45A /* texture.frag */,
+				DA2D23FC1E7FB1330051C45A /* texture.vert */,
+			);
+			name = shaders;
+			sourceTree = "<group>";
+		};
 		DA8982351E7A316A00CDBE2F = {
 			isa = PBXGroup;
 			children = (
@@ -76,10 +90,13 @@
 		DA8982401E7A316A00CDBE2F /* OpenGL Exercise Program */ = {
 			isa = PBXGroup;
 			children = (
+				DA2D23FA1E7FB1260051C45A /* shaders */,
 				DA0915CB1E7BB5880042EDD9 /* texture.jpg */,
 				DA8982551E7A587900CDBE2F /* main.cpp */,
 				DA0915C01E7B85900042EDD9 /* Shader.cpp */,
 				DA0915C11E7B85900042EDD9 /* Shader.hpp */,
+				DA2D23FD1E7FC5260051C45A /* LessonCode.cpp */,
+				DA2D23FE1E7FC5260051C45A /* LessonCode.hpp */,
 			);
 			path = "OpenGL Exercise Program";
 			sourceTree = "<group>";
@@ -156,6 +173,7 @@
 			files = (
 				DA0915C21E7B85900042EDD9 /* Shader.cpp in Sources */,
 				DA8982561E7A587900CDBE2F /* main.cpp in Sources */,
+				DA2D23FF1E7FC5260051C45A /* LessonCode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

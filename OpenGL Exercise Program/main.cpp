@@ -18,6 +18,9 @@
 
 #include <SOIL.h>
 
+#include "Shader.hpp"
+#include "LessonCode.hpp"
+
 using namespace std;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -27,26 +30,31 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 const GLchar* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
 "layout (location = 1) in vec3 color;\n"
-"out vec3 vertexColor;\n"
+"layout (location = 2) in vec2 texCoord;\n"
+"out vec3 ourColor;\n"
+"out vec2 TexCoord;\n"
 "void main()\n"
 "{\n"
-"gl_Position = vec4(position, 1.0);\n"
-"vertexColor = color;\n"
+"    gl_Position = vec4(position, 1.0f);\n"
+"    ourColor = color;\n"
+"    TexCoord = texCoord;\n"
 "}\0";
 
 const GLchar* fragmentShaderSource = "#version 330 core\n"
-"in vec3 vertexColor;"
+"in vec3 ourColor;\n"
+"in vec2 TexCoord;\n"
 "out vec4 color;\n"
+"uniform sampler2D ourTexture;\n"
 "void main()\n"
 "{\n"
-"color = vec4(vertexColor, 1.0f);\n"
+"    color = texture(ourTexture, TexCoord);\n"
 "}\n\0";
+
 
 int main()
 {
-    int widthImage, heightImage;
-    unsigned char* image = SOIL_load_image("texture.png", &widthImage, &heightImage, 0, SOIL_LOAD_RGB);
-    
+    Lesson lesson;
+    lesson.loadLessonCode(1);
     //init glfw
     glfwInit();
     //set required options for glfw
@@ -74,9 +82,7 @@ int main()
     glewInit();
     
     // Set viewport
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, WIDTH, HEIGHT);
     
     //vertex shader
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -103,6 +109,8 @@ int main()
         std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
     }
     
+    Shader ourShader("/Users/lyfne/Desktop/texture.vert","/Users/lyfne/Desktop/texture.frag");
+    
     // Link shaders
     GLuint shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
@@ -119,10 +127,10 @@ int main()
     
     //set up vertex data
     GLfloat vertices[] = {
-        0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f,  // Top Right
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,  // Bottom Right
-        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // Bottom Left
-        -0.5f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f  // Top Left
+        0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // Top Right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom Right
+        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // Bottom Left
+        -0.5f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f // Top Left
     };
     GLuint indices[] = {  // Note that we start from 0!
         0, 1, 3,  // First Triangle
@@ -142,14 +150,30 @@ int main()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3*sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3*sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6*sizeof(GLfloat)));
+    glEnableVertexAttribArray(2);
     
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+   // glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
     
     glBindVertexArray(0);
+    
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    int width, height;
+    unsigned char* image = SOIL_load_image("/Users/lyfne/Desktop/texture.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(image);
+    glBindTexture(GL_TEXTURE_2D, 0);
     
     //set glPolygenMode
   //  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -162,13 +186,18 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        glUseProgram(shaderProgram);
+     //   glUseProgram(shaderProgram);
+     //   GLfloat timeValue = glfwGetTime();
+     //   GLfloat greenValue = (sin(timeValue) / 2) + 0.5
+       // GLint vertexColorLocation = glGetUniformLocation(ourShader.Program, "outColor");
+        //glUseProgram(shaderProgram);
+        //glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
         
-        GLfloat timeValue = glfwGetTime();
-        GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-        GLint vertexColorLocation = glGetUniformLocation(shaderProgram, "outColor");
-        glUseProgram(shaderProgram);
-        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        ourShader.Use();
+       // glActiveTexture(GL_TEXTURE0);
+        
+       // glUniform1f(glGetUniformLocation(shaderProgram, "ourTexture"), 1.0f);
         
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
